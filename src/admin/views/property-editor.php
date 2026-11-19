@@ -53,7 +53,7 @@ require SystemURLs::getDocumentRoot() . '/Include/Header.php';
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="description"><?= gettext('A') ?> <?= InputUtils::escapeHTML($recordTypeName) ?> <?= gettext('with this property...') ?></label>
+                        <label class="form-label" for="description"><?= InputUtils::escapeHTML($descriptionLabel) ?></label>
                         <textarea class="form-control" id="description" name="description" rows="3"><?= InputUtils::escapeHTML($description) ?></textarea>
                     </div>
 
