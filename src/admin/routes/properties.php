@@ -73,7 +73,16 @@ function adminPropertyEditor(Request $request, Response $response, array $args):
         PropertyService::CLASS_FAMILY => gettext('Family'),
         PropertyService::CLASS_GROUP => gettext('Group'),
     };
-    $pageTitle = $recordTypeName . ' ' . gettext('Property Editor');
+    $pageTitle = match ($class) {
+        PropertyService::CLASS_PERSON => gettext('Person Property Editor'),
+        PropertyService::CLASS_FAMILY => gettext('Family Property Editor'),
+        PropertyService::CLASS_GROUP => gettext('Group Property Editor'),
+    };
+    $descriptionLabel = match ($class) {
+        PropertyService::CLASS_PERSON => gettext('A Person with this property...'),
+        PropertyService::CLASS_FAMILY => gettext('A Family with this property...'),
+        PropertyService::CLASS_GROUP => gettext('A Group with this property...'),
+    };
     $formAction = SystemURLs::getRootPath() . '/admin/properties/' . ($isNew ? $recordType . '/new' : $propertyId . '/edit');
 
     $renderer = new PhpRenderer(__DIR__ . '/../views/');
@@ -93,6 +102,7 @@ function adminPropertyEditor(Request $request, Response $response, array $args):
         'formAction' => $formAction,
         'listUrl' => SystemURLs::getRootPath() . $listPath,
         'recordTypeName' => $recordTypeName,
+        'descriptionLabel' => $descriptionLabel,
         'propertyTypes' => PropertyService::getTypes($class),
         'nameMaxLength' => PropertyService::NAME_MAX_LENGTH,
         'promptMaxLength' => PropertyService::PROMPT_MAX_LENGTH,
