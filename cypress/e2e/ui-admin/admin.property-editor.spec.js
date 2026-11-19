@@ -20,6 +20,7 @@ describe("Admin defines the properties families and people can carry", () => {
         cy.get('a[href$="/admin/properties/family/new"]').first().click();
         cy.location("pathname").should("match", /\/admin\/properties\/family\/new$/);
         cy.contains("Family Property Editor");
+        cy.get('label[for="description"]').should("contain", "A Family with this property...");
 
         cy.get("#propertyTypeId").select(String(familyGeneralTypeId));
         cy.get("#name").type(propertyName);
